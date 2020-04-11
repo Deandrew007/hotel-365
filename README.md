@@ -1,6 +1,6 @@
 # hotel365
 
-A new Flutter project.
+Find Hotels in your area
 
 ## Getting Started
 
