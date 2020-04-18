@@ -29,7 +29,7 @@ class _ExploreState extends State<Explore> {
                     SizedBox(height: 32),
                     buildIconRow(),
                     ContentTitle('Hotels'),
-                    //buildHotelsList(),
+                    buildHotelsList(),
                     ContentTitle('Travel BLogs'),
                     //builBlogList(),
                   ],
@@ -61,7 +61,7 @@ class _ExploreState extends State<Explore> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text('Hotels',style: titleStyle),
+                child: Text('Hotels', style: titleStyle),
               ),
             ],
           ),
@@ -81,11 +81,11 @@ class _ExploreState extends State<Explore> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text('Favorites',style: titleStyle),
+                child: Text('Favorites', style: titleStyle),
               ),
             ],
           ),
-           Column(
+          Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Ink(
@@ -101,12 +101,28 @@ class _ExploreState extends State<Explore> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text('Restuarants',style: titleStyle),
+                child: Text('Restuarants', style: titleStyle),
               ),
             ],
           )
         ]);
   }
 
-  buildBottomAppBar() {}
+  Widget buildHotelsList() {
+    return Container(
+      height: 300,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        physics: BouncingScrollPhysics(),
+      //itemCount: ,
+        itemBuilder: (BuildContext context, int index) {
+
+        },
+        ),
+
+    );
+  }
+
+    buildBottomAppBar() {}
+
 }

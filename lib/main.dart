@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'Flights Over Feelings',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.purple,
+        primarySwatch: Colors.green,
       ),
       home: Explore(),
     );
