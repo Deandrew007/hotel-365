@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hotel365/ui/views/baseview.dart';
 import 'package:provider/provider.dart';
 import 'package:hotel365/core/viewmodels/explore_model.dart';
 import 'package:hotel365/service_locator.dart';
@@ -13,9 +14,7 @@ class Explore extends StatefulWidget {
 class _ExploreState extends State<Explore> {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<ExplorePageModel>(
-      builder: (context) => locator<ExplorePageModel>(),
-      child: Consumer<ExplorePageModel>(
+    return BaseView<ExplorePageModel>(
         builder: (context, model, child) => Scaffold(
           body: SingleChildScrollView(
             child: Container(
@@ -37,8 +36,7 @@ class _ExploreState extends State<Explore> {
           ),
           bottomNavigationBar: buildBottomAppBar(),
         ),
-      ),
-    );
+      );
   }
 
   Widget buildIconRow() {

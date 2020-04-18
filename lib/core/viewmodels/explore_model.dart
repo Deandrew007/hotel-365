@@ -1,8 +1,6 @@
 import 'package:flutter/foundation.dart';
+import 'package:hotel365/core/viewmodels/base_model.dart';
 
-/// Represents the state of the view
-enum ViewState { Idle, Busy }
-
-class ExplorePageModel extends ChangeNotifier {
+class ExplorePageModel extends BaseModel {
 
 }
