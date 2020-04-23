@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hotel365/core/enums/viewstate.dart';
+import 'package:hotel365/core/models/attractions_listing.dart';
 import 'package:hotel365/ui/views/baseview.dart';
 import 'package:provider/provider.dart';
 import 'package:hotel365/core/viewmodels/explore_model.dart';
@@ -15,26 +17,33 @@ class _ExploreState extends State<Explore> {
   @override
   Widget build(BuildContext context) {
     return BaseView<ExplorePageModel>(
+      onModelReady: (model){
+        model.getAttractions();
+      },
         builder: (context, model, child) => Scaffold(
-          body: SingleChildScrollView(
-            child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 8),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    SizedBox(height: AppBar().preferredSize.height * 1.5),
-                    Text('Explore the world on your budget',
-                        style: headerStyle),
-                    SizedBox(height: 32),
-                    buildIconRow(),
-                    ContentTitle('Hotels'),
-                    buildHotelsList(),
-                    ContentTitle('Travel BLogs'),
-                    //builBlogList(),
-                  ],
-                )),
-          ),
-          bottomNavigationBar: buildBottomAppBar(),
+          body: model.state == ViewState.Idle?
+          Container(
+            child: SingleChildScrollView(
+              child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      SizedBox(height: AppBar().preferredSize.height * 1.5),
+                      Text('Explore the world on your budget',
+                          style: headerStyle),
+                      SizedBox(height: 32),
+                      buildIconRow(),
+                      ContentTitle('Hotels'),
+                      buildHotelsList(model.attractions),
+                      ContentTitle('Travel BLogs'),
+                      //builBlogList(),
+                    ],
+                  )),
+            ),
+            //bottomNavigationBar: buildBottomAppBar(),
+          )
+          : Center(child: CircularProgressIndicator()),
         ),
       );
   }
@@ -106,16 +115,17 @@ class _ExploreState extends State<Explore> {
         ]);
   }
 
-  Widget buildHotelsList() {
+  Widget buildHotelsList(List<Attractions> attractions) {
     return Container(
-      height: 300,
+      height: 250,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         physics: BouncingScrollPhysics(),
-      //itemCount: ,
-        itemBuilder: (BuildContext context, int index) {
-
-        },
+        itemCount: attractions.length,
+        itemBuilder: (context, index) => AttractionListItem(
+            attraction: attractions[index],
+            onTap: () {},
+          ),
         ),
 
     );

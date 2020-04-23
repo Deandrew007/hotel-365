@@ -1,14 +1,14 @@
 import 'dart:io';
-
 import 'package:hotel365/core/models/attractions_listing.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:flutter_config/flutter_config.dart';
-
+import 'package:hotel365/utils/secrets.dart';
 
 /// The service responsible for networking requests
 
 class API {
+
+  Future<Secret> secret = SecretLoader(secretPath: "secrets.json").load();
 
   static const endpoint = 'https://tripadvisor1.p.rapidapi.com';
 
@@ -18,7 +18,9 @@ class API {
 
     var attractions = List<Attractions>();
 
-    var response = await http.get('$endpoint/attractions/list?', headers: {HttpHeaders.authorizationHeader:"d8f7bf5878msh786c42f94b33ca8p10d061jsn0dd4c054471d"});
+    var response = await http.get('$endpoint/attractions/list?', headers: {
+      HttpHeaders.contentTypeHeader: 'application/json',
+      HttpHeaders.authorizationHeader: '$secret'});
 
     //parsed into list
     var parsedList = json.decode(response.body) as List<dynamic>;
@@ -28,7 +30,7 @@ class API {
       attractions.add(Attractions.fromJson(attraction));
     }
 
-    print(attractions);
+    return attractions;
 
   }
 

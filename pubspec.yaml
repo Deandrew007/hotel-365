@@ -52,6 +52,7 @@ flutter:
   assets:
     - assets/images/hotel2.jpg
     - assets/images/hotel3.jpg
+    - secrets.json
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
